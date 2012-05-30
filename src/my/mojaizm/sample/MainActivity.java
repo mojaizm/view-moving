@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
 import android.view.animation.AnticipateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 
@@ -21,8 +22,9 @@ public class MainActivity extends Activity implements OnTouchListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        mView = (View) findViewById(R.id.View01);
-        mView.setOnTouchListener(this);
+        findViewById(R.id.View01).setOnTouchListener(this);
+        findViewById(R.id.View02).setOnTouchListener(this);
+        mView = (View)findViewById(R.id.View01);
     }
 
     public void onClickButton01(View v) {
@@ -39,6 +41,9 @@ public class MainActivity extends Activity implements OnTouchListener {
         int py = (int) ev.getRawY();
         
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            ((ViewGroup)vw.getParent()).bringChildToFront(vw); // z order
+            
+            mView = vw;
             mStartX = vw.getLeft();
             mStartY = vw.getTop();
             mDragOfsX = px;
