@@ -28,11 +28,11 @@ public class MainActivity extends Activity implements OnTouchListener {
     }
 
     public void onClickButton01(View v) {
-        ViewTween.to(mView, 0, 240, 1000l, new DecelerateInterpolator());
+        ViewTween.to(mView, 0, 240, 500l, new DecelerateInterpolator());
     }
 
     public void onClickButton02(View v) {
-        ViewTween.to(mView, 320, 0, 1000l, new AnticipateInterpolator());
+        ViewTween.to(mView, 320, 0, 500l, new AnticipateInterpolator());
     }
 
     @Override

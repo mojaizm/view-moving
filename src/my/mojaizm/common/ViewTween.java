@@ -12,7 +12,7 @@ import android.view.View;
 
 public class ViewTween {
     private static String TAG = ViewTween.class.getSimpleName();
-    private static final long LOOP_INTERVAL = 66;
+    private static final long LOOP_INTERVAL = 33;
     
     private static Map<View, Info> sInfoMap = new WeakHashMap<View, Info>();
     private static InternalHandler sMainHandler = new InternalHandler(Looper.getMainLooper());
