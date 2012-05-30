@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="fill_parent" android:id="@+id/layout">
+
+    <RelativeLayout
+        android:background="#333333"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_weight="10"
+        >
+        
+        <Button android:id="@+id/Button01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:text="左下"
+            android:onClick="onClickButton01"
+            android:width="150dp"
+            android:height="150dp"
+            >
+        </Button>
+        
+        <Button android:id="@+id/Button02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:text="右上"
+            android:onClick="onClickButton02"
+            android:width="150dp"
+            android:height="150dp"
+            >
+        </Button>
+        
+        <ImageView android:id="@+id/View01"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher"
+            >
+        </ImageView>
+    </RelativeLayout>
+</LinearLayout>
