@@ -28,11 +28,11 @@ public class MainActivity extends Activity implements OnTouchListener {
     }
 
     public void onClickButton01(View v) {
-        ViewTween.to(mView, 0, 240, 600l, new DecelerateInterpolator());
+        ViewTween.to(mView, 0, 240, 1000l, new DecelerateInterpolator());
     }
 
     public void onClickButton02(View v) {
-        ViewTween.to(mView, 320, 0, 600l, new AnticipateInterpolator());
+        ViewTween.to(mView, 320, 0, 1000l, new AnticipateInterpolator());
     }
 
     @Override
@@ -48,6 +48,7 @@ public class MainActivity extends Activity implements OnTouchListener {
             mStartY = vw.getTop();
             mDragOfsX = px;
             mDragOfsY = py;
+            ViewTween.cancel(vw);
         }
         else if (ev.getAction() == MotionEvent.ACTION_MOVE) {
             int to_x = mStartX + px - mDragOfsX;

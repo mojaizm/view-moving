@@ -19,6 +19,7 @@ public class ViewTween {
     
     private static interface Callback {
         public void onComplete();
+        public void onCancel();
     }
     
     private static class Info {
@@ -86,6 +87,17 @@ public class ViewTween {
         }
     }
     
+    public static void cancel(View vw) {
+        Info info = sInfoMap.get(vw);
+        if (info == null) {
+            return;
+        }
+        sInfoMap.remove(vw);
+        if (info.callback != null) {
+            info.callback.onCancel();
+        }
+        info = null;
+    }
     
     public static void to(View vw, int to_x, int to_y, long dulation, android.view.animation.Interpolator interpolator) {
         to(vw, to_x, to_y, dulation, null, interpolator);
