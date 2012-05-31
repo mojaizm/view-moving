@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:text="左下"
+            android:text="移動"
             android:onClick="onClickButton01"
             android:width="150dp"
             android:height="150dp"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:text="右上"
+            android:text="アニメーション"
             android:onClick="onClickButton02"
             android:width="150dp"
             android:height="150dp"
@@ -42,7 +42,15 @@
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:src="@drawable/ic_launcher"
-            >
-        </ImageView>
+            />
+        <ImageView android:id="@+id/View02"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/View01"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher"
+            />
     </RelativeLayout>
 </LinearLayout>
