@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.animation.AnticipateInterpolator;
-import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 
 public class MainActivity extends Activity implements OnTouchListener {
     private View mView;
@@ -28,11 +28,29 @@ public class MainActivity extends Activity implements OnTouchListener {
     }
 
     public void onClickButton01(View v) {
-        ViewTween.to(mView, 0, 240, 500l, new DecelerateInterpolator());
+        int to_x = 320;
+        int to_y = 0;
+        int size = 80;
+        if (mView.getLeft() > 160) {
+            to_x = 0;
+            to_y = 240;
+            size = 150;
+        }
+        ViewTween.to(mView, 500l,
+                to_x, to_y,
+                size, size,
+                1.0f, 1.0f,
+                0.0f, 0.0f,
+                null, new AnticipateInterpolator());
     }
 
     public void onClickButton02(View v) {
-        ViewTween.to(mView, 320, 0, 500l, new AnticipateInterpolator());
+        ViewTween.to(mView, 800l,
+                mView.getLeft(), mView.getTop(),
+                mView.getWidth(), mView.getHeight(),
+                0.0f, 1.0f,
+                0.0f, 360.0f,
+                null, new LinearInterpolator());
     }
 
     @Override
