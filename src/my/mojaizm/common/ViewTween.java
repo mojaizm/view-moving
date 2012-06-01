@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationSet;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
@@ -55,7 +56,7 @@ public class ViewTween {
             
             for (View vw : sInfoMap.keySet()) {
                 
-                Info info = (Info)sInfoMap.get(vw);
+                Info info = sInfoMap.get(vw);
                 
                 if (vw.getParent() == null || info == null) {
                     sInfoMap.remove(vw);
@@ -111,16 +112,12 @@ public class ViewTween {
     public static void to(View view, long duration, int to_x, int to_y) {
         to(view, duration,
             to_x, to_y, view.getWidth(), view.getHeight(),
-            1.0f, 1.0f,
-            0.0f, 0.0f,
             null,
             new LinearInterpolator());
     }
         
     public static void to(View view, long duration,
             int to_x, int to_y, int to_w, int to_h,
-            float from_alpha, float to_alpha,
-            float from_ang, float to_ang,
             Callback callback,
             android.view.animation.Interpolator interpolator) {
         
@@ -152,32 +149,51 @@ public class ViewTween {
             view.getAnimation().cancel();
         }
         
-        AnimationSet anim = null;
-        if (from_alpha != to_alpha) {
-            if (anim == null) {
-                anim = new AnimationSet(true);
-            }
-            anim.addAnimation(new AlphaAnimation(from_alpha, to_alpha));
-        }
-        if (from_ang != to_ang) {
-            if (anim == null) {
-                anim = new AnimationSet(true);
-            }
-            anim.addAnimation(new RotateAnimation(from_ang, to_ang,
-                                Animation.RELATIVE_TO_SELF, 0.5f,
-                                Animation.RELATIVE_TO_SELF, 0.5f));
-        }
-        if (anim != null) {
-            anim.setDuration(duration);
-            anim.setInterpolator(interpolator);
-            anim.setFillBefore(true);
-            anim.setFillAfter(true);
-            view.startAnimation(anim);
-        }
-        
         if (sMainHandler.hasMessages(0)) {
             return;
         }
         sMainHandler.sendEmptyMessage(0);
+    }
+    
+    public static void anim(View view, long duration,
+            float from_alpha, float to_alpha,
+            float from_ang, float to_ang,
+            final Callback callback,
+            android.view.animation.Interpolator interpolator) {
+            
+        AnimationSet an = null;
+        if (from_alpha != to_alpha) {
+            if (an == null) {
+                an = new AnimationSet(true);
+            }
+            an.addAnimation(new AlphaAnimation(from_alpha, to_alpha));
+        }
+        if (from_ang != to_ang) {
+            if (an == null) {
+                an = new AnimationSet(true);
+            }
+            an.addAnimation(new RotateAnimation(from_ang, to_ang,
+                                Animation.RELATIVE_TO_SELF, 0.5f,
+                                Animation.RELATIVE_TO_SELF, 0.5f));
+        }
+        if (an != null) {
+            an.setDuration(duration);
+            an.setInterpolator(interpolator);
+            an.setFillBefore(true);
+            an.setFillAfter(true);
+            if (callback != null) {
+                an.setAnimationListener(new AnimationListener() {
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        callback.onComplete();
+                    }
+                    @Override
+                    public void onAnimationStart(Animation animation) {}
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {}
+                });
+            }
+            view.startAnimation(an);
+        }
     }
 }

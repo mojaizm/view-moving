@@ -24,7 +24,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 
         findViewById(R.id.View01).setOnTouchListener(this);
         findViewById(R.id.View02).setOnTouchListener(this);
-        mView = (View)findViewById(R.id.View01);
+        mView = findViewById(R.id.View01);
     }
 
     public void onClickButton01(View v) {
@@ -39,15 +39,11 @@ public class MainActivity extends Activity implements OnTouchListener {
         ViewTween.to(mView, 500l,
                 to_x, to_y,
                 size, size,
-                1.0f, 1.0f,
-                0.0f, 0.0f,
                 null, new AnticipateInterpolator());
     }
 
     public void onClickButton02(View v) {
-        ViewTween.to(mView, 800l,
-                mView.getLeft(), mView.getTop(),
-                mView.getWidth(), mView.getHeight(),
+        ViewTween.anim(mView, 800l,
                 0.0f, 1.0f,
                 0.0f, 360.0f,
                 null, new LinearInterpolator());
